@@ -10,6 +10,16 @@ const capitalize = (str) => {
     .join(' ');
 };
 
+// Get initials from name
+const getInitials = (name) => {
+  if (!name) return 'NA';
+  return name.split(' ')
+    .map(n => n[0])
+    .join('')
+    .substring(0, 2)
+    .toUpperCase();
+};
+
 const Home = () => {
   const [logData, setLogData] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -18,15 +28,18 @@ const Home = () => {
   const fetchLatestLog = async () => {
     try {
       const response = await axios.get(`${API_URL}/logs/latest`)
-      if (response.data && response.data.log) {
-        setLogData(response.data.log)
-      } else {
-        throw new Error('Invalid response format')
-      }
+      // kahit no log is found, this isn't an error state
+      // The API call was successful, just returned no data
+      setLogData(response.data?.log || null)
       setError(null)
     } catch (err) {
-      console.error('Error fetching latest log:', err)
-      setError('Failed to load the latest log. Please try again.')
+      if (err.response && err.response.status === 404) {
+        setLogData(null)
+        setError(null)
+      } else {
+        console.error('Error fetching latest log:', err)
+        setError('Failed to load the latest log. Please try again.')
+      }
     } finally {
       setLoading(false)
     }
@@ -56,12 +69,32 @@ const Home = () => {
     )
   }
 
-  if (error && !logData) {
+  if (error) {
     return (
       <div className='flex items-center justify-center w-full h-screen'>
         <div className='p-6 max-w-md bg-red-50 border border-red-200 rounded-lg'>
           <h2 className='text-xl font-semibold text-red-700 mb-2'>Error</h2>
-          <p className='text-red-600'>{error || 'No log data available'}</p>
+          <p className='text-red-600'>{error}</p>
+          <button
+            onClick={fetchLatestLog}
+            className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  if (!logData) {
+    return (
+      <div className='flex items-center justify-center w-full h-screen'>
+        <div className='flex flex-col items-center justify-center p-12 rounded-lg w-full max-w-xl text-center'>
+          <svg className="w-16 h-16 text-gray-300 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          <h3 className="text-xl font-medium text-gray-700 mb-2">No Activity Yet</h3>
+          <p className="text-gray-500">No log entries have been recorded. Tap a library card to time-in.</p>
         </div>
       </div>
     )
@@ -84,9 +117,11 @@ const Home = () => {
       {/* Container */}
       <div className='flex flex-col items-center justify-center border border-neutral-200 p-12 rounded-lg w-full max-w-xl shadow-xl shadow-neutral-200/20'>
         <div className='flex flex-col justify-center items-center'>
-          {/* Profile */}
-          <div className='relative w-40 h-40 rounded-full overflow-hidden ring-2 ring-offset-4 ring-neutral-200'>
-            <img src='https://placehold.co/30x30' alt="Profile" className='absolute object-cover w-full h-full' />
+          {/* Profile - Updated to use initials similar to UserData */}
+          <div className='flex items-center justify-center bg-neutral-800 w-40 h-40 rounded-full overflow-hidden ring-2 ring-offset-4 ring-neutral-200'>
+            <span className='text-6xl font-bold text-white'>
+              {getInitials(logData?.name)}
+            </span>
           </div>
           <h4 className='text-center mt-5 text-2xl font-bold'>{capitalize(logData?.name)}</h4>
           <span className='text-neutral-800 text-xl text-center'>{logData?.userID || 'N/A'}</span>
@@ -128,7 +163,6 @@ const Home = () => {
             <span className='block font-semibold text-lg text-neutral-900'>{capitalize(logData?.status)}</span>
             <span className='block text-neutral-500'>Status</span>
           </div>
-
 
           {/* Clearance */}
           <div>

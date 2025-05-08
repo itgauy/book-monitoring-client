@@ -121,9 +121,9 @@ const ActivityLog = () => {
                       <td className='p-4'>{log.userID || '--'}</td>
                       <td className='p-4'>{log.name || '--'}</td>
                       <td className='p-4'>
-                        <span className={`px-2 py-1 rounded-full text-xs ${log.role === 'student' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'
+                        <span className={`px-2 py-1 rounded-full text-xs ${log.role === 'Student' ? 'bg-blue-100 text-blue-800' : 'bg-purple-100 text-purple-800'
                           }`}>
-                          {log.role === 'student' ? 'Student' : 'Faculty'}
+                          {log.role === 'Student' ? 'Student' : 'Faculty'}
                         </span>
                       </td>
                       <td className='p-4'>{log.program || '--'}</td>
