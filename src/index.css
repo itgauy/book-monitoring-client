@@ -71,8 +71,11 @@ h5 {
 .swal-popup-xl {
   @apply rounded-2xl w-full max-w-xl bg-white;
 }
-.swal-popup-5xl {
-  @apply rounded-2xl w-full max-w-5xl bg-white;
+.swal-popup-2xl {
+  @apply rounded-2xl w-full max-w-2xl bg-white;
+}
+.swal-popup-6xl {
+  @apply rounded-2xl w-full max-w-6xl bg-white;
 }
 
 /* Title styling */
