@@ -93,19 +93,22 @@ const UserData = () => {
       // }
     }).then((result) => {
       if (result.isConfirmed && result.value) {
-
+        let timerInterval
         Swal.fire({
           title: 'Scan the RFID',
           text: "Kindly scan the RFID to proceed",
-          showCancelButton: true,
-          confirmButtonText: 'Yes, delete it',
-          cancelButtonText: 'Cancel',
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const timer = Swal.getPopup().querySelector("b")
+            timerInterval = setInterval(() => {
+              timer.textContent = `${Swal.getTimerLeft()}`
+            }, 100)
+          },
           customClass: {
             title: "swal-title",
             text: "swal-text",
             popup: "swal-popup-sm",
-            confirmButton: "swal-danger",
-            cancelButton: "swal-cancel"
           },
           showClass: {
             popup: 'swal-fade-in'
