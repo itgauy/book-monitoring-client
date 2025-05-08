@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Button, InputText } from '../components'
 import axios from 'axios'
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -40,56 +41,55 @@ const Login = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
+      <div className="border border-neutral-200 p-8 rounded-3xl shadow-xl shadow-neutral-200/30 w-full max-w-md">
+        <div className='mb-6'>
+          <h3 className="text-center">Login</h3>
+          <p className='text-center'>Login to proceed.</p>
+        </div>
 
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="username" className="block text-gray-700 text-sm font-bold mb-2">
-              Username:
-            </label>
-            <input
+        <form onSubmit={handleSubmit} className='space-y-4'>
+          {/* Username */}
+          <fieldset className='flex flex-col gap-1'>
+            <label htmlFor="username">Username</label>
+            <InputText
               type="text"
+              placeholder="Your username"
               id="username"
               name="username"
               value={formData.username}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-
             />
-          </div>
-
-          <div className="mb-6">
-            <label htmlFor="password" className="block text-gray-700 text-sm font-bold mb-2">
-              Password:
-            </label>
-            <input
-              type="password"
+          </fieldset>
+          {/* Password */}
+          <fieldset className='flex flex-col gap-1'>
+            <label htmlFor="password">Password</label>
+            <InputText
+              type="text"
+              placeholder="Your password"
               id="password"
               name="password"
               value={formData.password}
               onChange={handleChange}
               className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-
             />
-          </div>
-
+          </fieldset>
+          {/* Error Message */}
           {error && (
-            <div className="mb-4 p-2 bg-red-100 border border-red-400 text-red-700 rounded">
-              {error}
-            </div>
+            <span className='block text-center text-red-500'>{error}</span>
           )}
-
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          {/* Submit Button */}
+          <Button
+            variant='primary'
+            type='submit'
+            className='w-full mt-8'
           >
             Login
-          </button>
+          </Button>
         </form>
 
         <div className="text-center mt-4">
-          <a href="/" className="text-sm text-blue-500 hover:text-blue-700">
+          <a href="/" className="text-sm underline">
             Back to Home
           </a>
         </div>
