@@ -7,6 +7,7 @@ import Admin from './pages/Admin'
 import UserData from './pages/UserData'
 import BookData from './pages/BookData'
 import ActivityLog from './pages/ActivityLog'
+import ActionButtons from './chef/ActionButtons'
 
 // components
 
@@ -38,6 +39,7 @@ function App() {
                 <Route path="bookdata" element={<BookData />} />
                 <Route path="log" element={<ActivityLog />} />
               </Route>
+              <Route path="/ab" element={<Auth><ActionButtons /></Auth>} />
             </Routes>
           </div>
         </BrowserRouter>
