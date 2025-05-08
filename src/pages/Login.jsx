@@ -65,7 +65,7 @@ const Login = () => {
           <fieldset className='flex flex-col gap-1'>
             <label htmlFor="password">Password</label>
             <InputText
-              type="text"
+              type="password"
               placeholder="Your password"
               id="password"
               name="password"
