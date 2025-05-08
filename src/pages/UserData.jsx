@@ -12,6 +12,7 @@ const UserData = () => {
   const [error, setError] = useState(null)
   const [search, setSearch] = useState('')
   const [selectedBorrower, setSelectedBorrower] = useState(null)
+  const [recentBorrowers, setRecentBorrowers] = useState([])
 
   // Fetch all borrowers
   const fetchBorrowers = async () => {
@@ -47,7 +48,6 @@ const UserData = () => {
   }
 
   // Handle borrower selection
-  // Modify handleSelectBorrower function
   const handleSelectBorrower = async (borrower) => {
     try {
       const books = await fetchBorrowerBooks(borrower.userID)
@@ -78,14 +78,44 @@ const UserData = () => {
         }
       }
 
-      setSelectedBorrower({
+      const borrowerWithBooks = {
         ...updatedBorrower,
         books
+      }
+
+      setSelectedBorrower(borrowerWithBooks)
+
+      // Update recent borrowers list
+      setRecentBorrowers(prev => {
+        // Remove this borrower from the list if already present
+        const filtered = prev.filter(item => item._id !== borrower._id)
+        // Add to beginning of array and limit to 5 items
+        return [borrowerWithBooks, ...filtered].slice(0, 5)
       })
     } catch (err) {
       console.error('Error selecting borrower:', err)
     }
   }
+
+  // Handle keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Check if a number key 1-5 is pressed
+      if (e.key >= '1' && e.key <= '5') {
+        const index = parseInt(e.key) - 1
+        if (recentBorrowers[index]) {
+          handleSelectBorrower(recentBorrowers[index])
+        }
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [recentBorrowers]) // Dependency on recentBorrowers
 
   useEffect(() => {
     fetchBorrowers()
@@ -349,6 +379,26 @@ const UserData = () => {
             Add User
             <HiOutlinePlusSm className='size-5 stroke-2' />
           </Button>
+
+          {/* Recent Borrowers List */}
+          {!loading && !error && recentBorrowers.length > 0 && (
+            <div className='mb-4 p-3 bg-blue-50 rounded-lg hidden'>
+              <h6 className='text-sm font-semibold mb-2'>Recent users (press 1-5 to select):</h6>
+              <div className='flex flex-wrap gap-2'>
+                {recentBorrowers.map((borrower, index) => (
+                  <button
+                    key={borrower._id}
+                    onClick={() => handleSelectBorrower(borrower)}
+                    className={`px-3 py-1 text-sm rounded-full ${selectedBorrower?._id === borrower._id
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-white border border-blue-200 hover:bg-blue-100'}`}
+                  >
+                    <span className='font-bold mr-1'>{index + 1}</span> {borrower.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Loading/Error States */}
@@ -574,8 +624,14 @@ const UserData = () => {
               <Button
                 variant='primary'
                 onClick={handleBorrowBook}
+                disabled={!(selectedBorrower.isCleared === true || selectedBorrower.isCleared === "true" || selectedBorrower.clearance === "Cleared")}
+                className={!(selectedBorrower.isCleared === true || selectedBorrower.isCleared === "true" || selectedBorrower.clearance === "Cleared")
+                  ? "opacity-50 cursor-not-allowed"
+                  : ""}
               >
-                Borrow a book
+                {(selectedBorrower.isCleared === true || selectedBorrower.isCleared === "true" || selectedBorrower.clearance === "Cleared")
+                  ? "Borrow a book"
+                  : "Not cleared to borrow"}
               </Button>
             </div>
           </>

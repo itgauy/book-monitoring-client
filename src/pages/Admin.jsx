@@ -87,7 +87,7 @@ const Admin = () => {
               <div className='flex items-center justify-center shrink-0 size-12 rounded-xl bg-neutral-800'>
                 <HiOutlineBookmarkAlt className='size-8 text-neutral-300 stroke-[1px]' />
               </div>
-              <h5>Hello</h5>
+              <h5>Book Monitor</h5>
             </div>
             <ul className="mt-10 flex flex-col gap-2">
               {[
