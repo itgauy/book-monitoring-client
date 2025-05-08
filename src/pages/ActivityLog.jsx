@@ -22,24 +22,26 @@ const ActivityLog = () => {
           <table className='min-w-full text-sm text-left'>
             <thead className='bg-neutral-50'>
               <tr>
-                <th className='p-3'><p>Book ID</p></th>
-                <th className='p-3'><p>ISBN</p></th>
-                <th className='p-3'><p>Title</p></th>
-                <th className='p-3'><p>Author</p></th>
-                <th className='p-3'><p>Publication Year</p></th>
-                <th className='p-3'><p>Category</p></th>
-                <th className='p-3'><p>Status</p></th>
+                <th className='p-4'><p>User ID</p></th>
+                <th className='p-4'><p>Name</p></th>
+                <th className='p-4'><p>Gender</p></th>
+                <th className='p-4'><p>Role</p></th>
+                <th className='p-4'><p>Program</p></th>
+                <th className='p-4'><p>Contact Number</p></th>
+                <th className='p-4'><p>Clearance</p></th>
+                <th className='p-4'><p>Timestamp</p></th>
               </tr>
             </thead>
             <tbody>
               <tr className='border-t border-neutral-200/70 mx-12'>
-                <td className='p-3'>22-2808</td>
-                <td className='p-3'>123123123</td>
-                <td className='p-3'>Hello of lire</td>
-                <td className='p-3'>Lian V. Torres</td>
-                <td className='p-3'>02/12/2005</td>
-                <td className='p-3'>Science Fiction</td>
-                <td className='p-3'>Borrowed</td>
+                <td className='p-4'>22-2808</td>
+                <td className='p-4'>Lian T. Villanueva</td>
+                <td className='p-4'>Male</td>
+                <td className='p-4'>Student</td>
+                <td className='p-4'>BSIT</td>
+                <td className='p-4'>0912358719</td>
+                <td className='p-4'>Cleared</td>
+                <td className='p-4'>--</td>
               </tr>
             </tbody>
           </table>
