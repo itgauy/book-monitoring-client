@@ -9,7 +9,6 @@ import { HiLogout, HiOutlineClipboard, HiOutlineUser, HiOutlineBookOpen, HiOutli
 import { Button } from '../components'
 
 const Admin = () => {
-  const [isLoggedOut, setIsLoggedOut] = useState(false)
   const location = useLocation()
   const [isNavOpen, setIsNavOpen] = useState(false)
 
@@ -35,6 +34,12 @@ const Admin = () => {
       hideClass: {
         popup: 'swal-fade-out'
       },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('userType')
+        localStorage.removeItem('token')
+        window.location.href = '/login'
+      }
     })
   }
 
