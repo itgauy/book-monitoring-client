@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 // pages
+import Connect from './pages/Connect'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Admin from './pages/Admin'
@@ -31,6 +32,7 @@ function App() {
 
               {/* GUEST */}
               <Route path="/login" element={<Guest><Login /></Guest>} />
+              <Route path="/connect" element={<Guest><Connect /></Guest>} />
 
 
               {/* AUTH */}
