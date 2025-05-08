@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 // pages
 import Home from './pages/Home'
 import Login from './pages/Login'
+import Admin from './pages/Admin'
 import UserData from './pages/UserData'
 import BookData from './pages/BookData'
 import ActivityLog from './pages/ActivityLog'
@@ -32,10 +33,11 @@ function App() {
 
 
               {/* AUTH */}
-              <Route path="/userdata" element={<Auth><UserData /></Auth>} />
-              <Route path="/bookdata" element={<Auth><BookData /></Auth>} />
-              <Route path="/log" element={<Auth><ActivityLog /></Auth>} />
-
+              <Route path="/admin" element={<Auth><Admin /></Auth>}>
+                <Route path="userdata" element={<UserData />} />
+                <Route path="bookdata" element={<BookData />} />
+                <Route path="log" element={<ActivityLog />} />
+              </Route>
             </Routes>
           </div>
         </BrowserRouter>

@@ -1,1 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 @import "tailwindcss";
+
+* {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-neutral-50/50;
+  font-family: "Inter", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@layer base {
+  [type="checkbox"] {
+    @apply appearance-none size-4 transition duration-300 ease-in-out rounded-sm border border-neutral-300 focus:ring-2 focus:ring-offset-2 focus:ring-neutral-800;
+  }
+
+  [type="checkbox"]:checked {
+    @apply bg-neutral-800;
+  }
+}
+
+p,
+label {
+  @apply md:text-base text-sm text-neutral-800;
+}
+h1 {
+  @apply md:text-6xl text-5xl font-bold text-neutral-900;
+}
+h2 {
+  @apply md:text-5xl text-4xl font-bold text-neutral-900;
+}
+h3 {
+  @apply md:text-4xl text-3xl font-bold text-neutral-900;
+}
+h4 {
+  @apply md:text-3xl text-2xl font-bold text-neutral-900;
+}
+h5 {
+  @apply md:text-2xl text-xl font-bold text-neutral-900;
+}
+
+/* Custom Scrollbar - for component */
+
+.custom-scollbar::-webkit-scrollbar {
+  @apply w-2;
+}
+
+.custom-scollbar::-webkit-scrollbar-track {
+  @apply bg-neutral-100/50 my-4;
+}
+
+.custom-scollbar::-webkit-scrollbar-thumb {
+  @apply bg-neutral-400/40 rounded-md;
+}
+
+/* -------- Sweet Alert Error --------- */
+/* Popup container */
+.swal-popup-sm {
+  @apply rounded-2xl w-full max-w-sm bg-white;
+}
+.swal-popup-md {
+  @apply rounded-2xl w-full max-w-md bg-white;
+}
+.swal-popup-lg {
+  @apply rounded-2xl w-full max-w-lg bg-white;
+}
+.swal-popup-xl {
+  @apply rounded-2xl w-full max-w-xl bg-white;
+}
+.swal-popup-5xl {
+  @apply rounded-2xl w-full max-w-5xl bg-white;
+}
+
+/* Title styling */
+.swal-title {
+  @apply text-neutral-800 font-bold text-2xl;
+}
+
+/* Text styling */
+.swal-text {
+  @apply text-neutral-600;
+}
+
+/* Confirm button styling */
+.swal-confirm {
+  @apply px-3 py-1.5 rounded-[9px] bg-neutral-800 text-white cursor-pointer;
+}
+
+/* Cancel button styling */
+.swal-cancel {
+  @apply px-3 py-1.5 rounded-[9px] bg-neutral-100 text-neutral-950 cursor-pointer;
+}
+
+/* Success button styling */
+.swal-success {
+  @apply px-3 py-1.5 rounded-[9px] bg-green-500 text-white cursor-pointer;
+}
+
+/* Info button styling */
+.swal-info {
+  @apply px-3 py-1.5 rounded-[9px] bg-blue-500 text-white cursor-pointer;
+}
+
+/* Danger button styling */
+.swal-danger {
+  @apply px-3 py-1.5 rounded-[9px] bg-red-500 text-white cursor-pointer;
+}
+
+/* Swal Input */
+.swal-input {
+  @apply px-3 py-1.5 border border-neutral-300/60 bg-neutral-100/60 rounded-lg focus:ring-2 ring-offset-1 focus:ring-neutral-800 focus:outline-none text-neutral-950 transition duration-300 ease-in-out;
+}
+
+/* Swal Textarea */
+.swal-textarea {
+  @apply px-3 py-1.5 border border-neutral-300/60 bg-neutral-100/60 rounded-lg focus:ring-2 ring-offset-1 focus:ring-neutral-800 focus:outline-none text-neutral-950 transition duration-300 ease-in-out resize-none w-full min-h-[120px];
+}
+
+.swal-fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.swal-fade-out {
+  animation: fadeOut 0.2s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}

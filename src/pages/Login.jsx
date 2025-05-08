@@ -28,7 +28,7 @@ const Login = () => {
       const response = await axios.post(`${API_URL}/login`, formData)
       localStorage.setItem('token', response.data.token)
       localStorage.setItem('userType', response.data.result.userType)
-      navigate('/userdata')
+      navigate('/admin/userdata')
     } catch (err) {
       setError(err.response.data.message || 'An error occurred')
       setFormData(prevState => ({
