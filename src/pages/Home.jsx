@@ -128,6 +128,13 @@ const Home = () => {
             <span className='block font-semibold text-lg text-neutral-900'>{capitalize(logData?.status)}</span>
             <span className='block text-neutral-500'>Status</span>
           </div>
+
+
+          {/* Clearance */}
+          <div>
+            <span className='block font-semibold text-lg text-neutral-900'>{capitalize(logData?.clearance)}</span>
+            <span className='block text-neutral-500'>Clearance</span>
+          </div>
         </div>
       </div>
     </div>

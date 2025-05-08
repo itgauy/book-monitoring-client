@@ -75,22 +75,22 @@ const UserData = () => {
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: 'Add User',
-      // preConfirm: () => {
-      //   const userId = document.getElementById('swal-userid').value.trim()
-      //   const name = document.getElementById('swal-name').value.trim()
-      //   const gender = document.getElementById('swal-gender').value
-      //   const role = document.getElementById('swal-role').value
-      //   const program = document.getElementById('swal-program').value
-      //   const contact = document.getElementById('swal-contact').value.trim()
-      //   const clearance = document.getElementById('swal-clearance').value
+      preConfirm: () => {
+        const userId = document.getElementById('swal-userid').value.trim()
+        const name = document.getElementById('swal-name').value.trim()
+        const gender = document.getElementById('swal-gender').value
+        const role = document.getElementById('swal-role').value
+        const program = document.getElementById('swal-program').value
+        const contact = document.getElementById('swal-contact').value.trim()
+        const clearance = document.getElementById('swal-clearance').value
 
-      //   if (!userId || !name || !gender || !role || !program || !contact || !clearance) {
-      //     document.getElementById('swal-validation-message').textContent = 'All fields are required.'
-      //     return false
-      //   }
+        if (!userId || !name || !gender || !role || !program || !contact || !clearance) {
+          document.getElementById('swal-validation-message').textContent = 'All fields are required.'
+          return false
+        }
 
-      //   return { userId, name, gender, role, program, contact, clearance }
-      // }
+        return { userId, name, gender, role, program, contact, clearance }
+      }
     }).then((result) => {
       if (result.isConfirmed && result.value) {
         let timerInterval
@@ -119,6 +119,33 @@ const UserData = () => {
         })
 
       }
+    })
+  }
+
+  // Borrow Book
+  const handleBorrowBook = () => {
+    Swal.fire({
+      title: 'Scan the RFID',
+      text: "Kindly scan the RFID to proceed",
+      timerProgressBar: true,
+      didOpen: () => {
+        Swal.showLoading()
+        const timer = Swal.getPopup().querySelector("b")
+        timerInterval = setInterval(() => {
+          timer.textContent = `${Swal.getTimerLeft()}`
+        }, 100)
+      },
+      customClass: {
+        title: "swal-title",
+        text: "swal-text",
+        popup: "swal-popup-sm",
+      },
+      showClass: {
+        popup: 'swal-fade-in'
+      },
+      hideClass: {
+        popup: 'swal-fade-out'
+      },
     })
   }
 
@@ -176,15 +203,18 @@ const UserData = () => {
       </div>
       {/*  */}
       <div className='w-full max-w-md p-6 rounded-3xl border border-neutral-200 shadow-xl shadow-neutral-200/20 space-y-6'>
-        <h5>User info</h5>
-        <div className='flex items-center justify-center w-full'>
+        <div>
+          <h5>User info</h5>
+          <span className='block leading-5 mt-1'>Search or scan the library card <br />  to view user info.</span>
+        </div>
+        <div className='flex items-center justify-center w-full mt-2'>
           {/* Profile */}
-          <div className='relative size-40 rounded-full overflow-hidden ring-2 ring-offset-4 ring-neutral-200'>
-            <img src='https://placehold.co/30x30' alt="Profile" className='absolute object-cover w-full h-full' />
+          <div className='flex items-center justify-center bg-neutral-800 size-24 rounded-full overflow-hidden ring-2 ring-offset-4 ring-neutral-300'>
+            <span className='text-4xl font-bold text-white'>LT</span>
           </div>
         </div>
         {/* Datas */}
-        <div className='grid grid-cols-2 gap-x-2 gap-y-8 mt-12'>
+        <div className='grid grid-cols-2 gap-x-2 gap-y-6 mt-8'>
           {/* userID */}
           <div>
             <span className='block font-semibold text-lg text-neutral-900'>22-2808</span>
@@ -215,18 +245,29 @@ const UserData = () => {
             <span className='block font-semibold text-lg text-neutral-900'>0912358719</span>
             <span className='block text-neutral-500'>Contact Number</span>
           </div>
+          {/* Status */}
+          <div>
+            <span className='block font-semibold text-lg text-neutral-900'>Active</span>
+            <span className='block text-neutral-500'>Status</span>
+          </div>
           {/* Clearance */}
           <div>
             <span className='block font-semibold text-lg text-neutral-900'>Cleared</span>
             <span className='block text-neutral-500'>Clearance</span>
           </div>
+          {/* Borrowed Books */}
+          <div className='col-span-full border border-neutral-200 bg-neutral-50/80 rounded-xl px-4 py-3'>
+            <span className='block text-neutral-700'>Book Name: <span className='text-neutral-900 text-lg font-semibold'>Hell of fire</span></span>
+            <span className='block text-neutral-700'>Date to be returned: <span className='text-neutral-900 text-lg font-semibold'>05/09/2025</span></span>
+            <span className='block text-neutral-700'>Past due date: <span className='text-red-600 text-lg font-semibold'>05/09/2025</span></span>
+          </div>
         </div>
         <div className='flex justify-end'>
           <Button
             variant='primary'
-          // onClick={handleArchiveUser}
+            onClick={handleBorrowBook}
           >
-            Archive
+            Borrow a book
           </Button>
         </div>
       </div>
