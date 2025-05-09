@@ -36,7 +36,7 @@ const ErrorPage = () => {
 
           <p className="!text-gray-400 mb-6">
             If you believe this is an error, please contact support with your deployment details.
-            Reference ID: <span className="font-mono bg-gray-800 px-2 py-1 rounded text-xs !text-white">dpmt_8f72e951</span>
+            Reference ID: <span className="font-mono bg-gray-800 px-2 py-1 rounded text-xs !text-white">dpmt_8f72e951 ITS A PRANKKK</span>
           </p>
 
           <div className="border-t border-gray-800 pt-6 mt-6 flex justify-between items-center">
