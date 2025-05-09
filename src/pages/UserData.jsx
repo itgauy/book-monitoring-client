@@ -353,6 +353,12 @@ const UserData = () => {
       },
     }).then((result) => {
       clearInterval(timerInterval)
+
+      // Add a small delay to ensure the modal has completely faded out
+      setTimeout(() => {
+        // Reload the page
+        window.location.reload()
+      }, 300)
     })
   }
 
