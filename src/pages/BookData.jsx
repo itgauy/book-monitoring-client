@@ -433,7 +433,7 @@ const BookData = () => {
             <HiOutlineSearch className="w-12 h-12 text-gray-300 mb-4" />
             <h5 className="text-lg font-medium mb-2">Book info</h5>
             <span className='block leading-5 text-gray-500'>
-              Click on a book from the table or tap the back of the book to view information.
+              Click on a book from the table to view information.
             </span>
           </div>
         )}

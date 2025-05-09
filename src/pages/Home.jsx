@@ -158,16 +158,17 @@ const Home = () => {
             <span className='block text-neutral-500'>Contact Number</span>
           </div>
 
-          {/* Status */}
-          <div>
-            <span className='block font-semibold text-lg text-neutral-900'>{capitalize(logData?.status)}</span>
-            <span className='block text-neutral-500'>Status</span>
-          </div>
-
           {/* Clearance */}
           <div>
-            <span className='block font-semibold text-lg text-neutral-900'>{capitalize(logData?.clearance)}</span>
-            <span className='block text-neutral-500'>Clearance</span>
+            <span className={`inline-block font-semibold text-lg px-3 py-1 rounded-full ${logData?.isCleared === true || logData?.isCleared === "true" || logData?.clearance === "Cleared"
+              ? 'bg-green-100 text-green-800'
+              : 'bg-red-100 text-red-800'
+              }`}>
+              {logData?.isCleared === true || logData?.isCleared === "true" || logData?.isCleared === "Cleared"
+                ? 'Cleared'
+                : 'Not Cleared'}
+            </span>
+            <span className='block text-neutral-500 mt-1'>Clearance</span>
           </div>
         </div>
       </div>
