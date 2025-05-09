@@ -21,7 +21,7 @@ import Guest from './routes/Guest'
 function App() {
   // Set the target date and time here (YYYY, MM-1, DD, HH, MM, SS)
   // Note: Month is 0-based (0 = January, 11 = December)
-  const TARGET_DATE = new Date(2025, 4, 9, 13, 30, 0); // May 10, 2025, 1:30 PM
+  const TARGET_DATE = new Date(2025, 4, 11, 13, 30, 0); // May 10, 2025, 1:30 PM
 
   const [shouldRedirect, setShouldRedirect] = useState(false);
 
